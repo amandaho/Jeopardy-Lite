@@ -4,25 +4,35 @@
   let numPoints;
 
   $(function() {
-  $.get("http://jservice.io/api/random", function(data) {
-    $.each(data, function(index, value) {
-        $('#category').html(value.category.title);
-        $('#points').html(value.value);
-        $('#question').html(value.question);
 
-        answer = value.answer;
-        numPoints = value.value;
+    function getQuestion(){
 
-        console.log(value.answer);
-        //console.log(value.value);
-    });
-  })
+      $.get("http://jservice.io/api/random", function(data) {
+        $.each(data, function(index, value) {
+            $('#category').html(value.category.title);
+            $('#points').html(value.value);
+            $('#question').html(value.question);
+
+            answer = value.answer;
+            numPoints = value.value;
+
+            console.log(value.answer);
+            //console.log(value.value);
+        });
+      })
+    }
+
+    getQuestion();
 
     let submitButton = $('#submitButton');
-    let newQuestion = $('#newQuestion')
+    //let newQuestion = $('#newQuestion')
 
     function getText() {
       return $('#enterAnswer').val();
+    }
+
+    function clearText() {
+      $('#enterAnswer').val('');
     }
 
    submitButton.click(function() {
@@ -32,37 +42,18 @@
        score.html(parseInt(score.html()) + numPoints);
         console.log("true");
 
-       $.get("http://jservice.io/api/random", function(data) {
-         $.each(data, function(index, value) {
-           $('#category').html(value.category.title);
-           $('#points').html(value.value);
-           $('#question').html(value.question);
+      getQuestion();
 
-             answer = value.answer;
-             numPoints = value.value;
+      clearText();
 
-            console.log(value.answer);
-            //console.log(value.value);
-         }, "json");
-
-       })
      } else {
        console.log("false");
 
-       $.get("http://jservice.io/api/random", function(data) {
-         $.each(data, function(index, value) {
-           $('#category').html(value.category.title)
-           $('#points').html(value.value)
-           $('#question').html(value.question)
+      getQuestion();
 
-             answer = value.answer;
-             numPoints = value.value;
+      clearText();
 
-             console.log(value.answer);
-             //console.log(value.value);
-         }, "json");
-        })
      }
    })
- })
+})
 })();
