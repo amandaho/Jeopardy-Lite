@@ -1,9 +1,12 @@
 (function() {
-  let score = $('#score');
-  let answer;
-  let numPoints;
+
 
   $(function() {
+
+    let score = $('#score');
+    let submitButton = $('#submitButton');
+    let answer;
+    let numPoints;
 
     function getQuestion(){
 
@@ -24,8 +27,6 @@
 
     getQuestion();
 
-    let submitButton = $('#submitButton');
-    //let newQuestion = $('#newQuestion')
 
     function getText() {
       return $('#enterAnswer').val();
